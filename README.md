@@ -13,10 +13,12 @@ In the database the Realms as stored in the table realm, be aware of the new Rea
 ## Clients migration
 Rule: When creating the new Realms, Keycloak automatically create some default resources, one of them are the clients. Be aware of the new client IDs for this default initial clients, which you will need for the next steps.
 
+### Customized Clients
 The idea is to migrate only the customized clients, and the good news here is, once migrated they will remain with the same client_id.
 
 The users are linked with clients by the service_account_client_link column which is the same client_id column in client table.
 
+### Default Clients
 **Yes, after the migration of users and clients, the users that have link with default clients will need to have this registers updated or recreated.**
 
 ## Users migration
@@ -44,6 +46,15 @@ After migrate Users and Groups keeping theirs source Ids, now It's important to 
 The roles are stored in keycloak_role table. 
 
 Inside the Realm, How a User is associated with a Role?
+
+### Customized Roles
+This query give us the customized roles 
+
+´´´
+SELECT id, client_realm_constraint, client_role, description, "name", realm_id, client, realm
+FROM public.keycloak_role
+where description is null;
+´´´
 
 
 
