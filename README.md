@@ -69,7 +69,7 @@ SELECT role_id, user_id
 FROM public.user_role_mapping
 where role_id in (''id','id2','id3',...)
 ```
-os ids, sao todos os ids da tabela keycloak_role
+These IDs, are only IDs we imported in our keycloak_role table. We dont wanna have user_role associations with roles (default ones) that we didnt imported yet. 
 
 With that, we will now apply a query like that:
 
@@ -78,7 +78,6 @@ INSERT INTO public.user_role_mapping (role_id,user_id) VALUES
 	 ('role_id1','user_id1'),
 	 ('role_id1','user_id2'),
 ```
-
 
 ### Default Roles (397 cases)
 
