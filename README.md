@@ -45,8 +45,6 @@ After migrate Users and Groups keeping theirs source Ids, now It's important to 
 
 The roles are stored in keycloak_role table. 
 
-Inside the Realm, How a User is associated with a Role?
-
 ### Customized Roles (167 cases)
 This query give us the customized roles 
 
@@ -59,6 +57,28 @@ So, this table has columns
 client_realm_constraint: that can refer to the Realm or the client with this role.
 When it refers to clients, no worries, you already migrate the clients in the step before! It will be there waiting for this role to be attached.
 When it refers to the Realm, you only need to replace it with the new Realm ID.
+
+Inside the Realm, How is a User associated with a Role?
+
+A: by the table user_role_mapping. So let´s migrate this table too.
+
+And this query will bring this for us:
+
+```
+SELECT role_id, user_id
+FROM public.user_role_mapping
+where role_id in (''id','id2','id3',...)
+```
+os ids, sao todos os ids da tabela keycloak_role
+
+With that, we will now apply a query like that:
+
+```
+INSERT INTO public.user_role_mapping (role_id,user_id) VALUES
+	 ('role_id1','user_id1'),
+	 ('role_id1','user_id2'),
+```
+
 
 ### Default Roles (397 cases)
 
