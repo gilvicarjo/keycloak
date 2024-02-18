@@ -47,7 +47,7 @@ The roles are stored in keycloak_role table.
 
 Inside the Realm, How a User is associated with a Role?
 
-### Customized Roles
+### Customized Roles (167 cases)
 This query give us the customized roles 
 
 ```
