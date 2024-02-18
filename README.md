@@ -41,6 +41,8 @@ After migrate Users and Groups keeping theirs source Ids, now It's important to 
 
 ## Roles migration
 
+The roles are stored in keycloak_role table. 
+
 Inside the Realm, How a User is associated with a Role?
 
 
