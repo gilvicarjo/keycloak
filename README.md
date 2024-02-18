@@ -22,6 +22,8 @@ The users are linked with clients by the service_account_client_link column whic
 ## Users migration
 Users are stored in the user_entity table. They only need to set the column realm_id for the new realm ID created in the previous step.
 
+**One thing is missing here: verify the accounts.**
+
 ## Credentials migration
 The credential table is really simple it's a source of truth and only the table user_entity (Users) has link with it.
 
@@ -34,6 +36,8 @@ Groups are stored in the table keycloak_group
 Each register only refers for a upstream folder (or not) and a realm_id.
 
 So the idea here in Groups is the same for Users, It just need to have the realm_id updated for the new ones in the new Keycloak setup.
+
+After migrate Users and Groups keeping theirs source Ids, now It's important to migrate the table user_group_membership. The name explains itself.
 
 ## Roles migration
 
