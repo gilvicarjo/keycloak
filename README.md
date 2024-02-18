@@ -50,11 +50,18 @@ Inside the Realm, How a User is associated with a Role?
 ### Customized Roles
 This query give us the customized roles 
 
-´´´
+```
 SELECT id, client_realm_constraint, client_role, description, "name", realm_id, client, realm
 FROM public.keycloak_role
-where description is null;
-´´´
+and remove the ones that has variables refereces in description column.
+```
+So, this table has columns
+client_realm_constraint: that can refer to the Realm or the client with this role.
+When it refers to clients, no worries, you already migrate the clients in the step before! It will be there waiting for this role to be attached.
+When it refers to the Realm, you only need to replace it with the new Realm ID.
+
+### Default Roles (397 cases)
+
 
 
 
