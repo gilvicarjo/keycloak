@@ -26,5 +26,15 @@ The credential table is really simple it's a source of truth and only the table 
 
 The column id in the user_entity must match the column user_id in credential table.
 
+## Groups migration
+
+Groups are stored in the table keycloak_group
+
+Each register only refers for a upstream folder (or not) and a realm_id.
+
+So the idea here in Groups is the same for Users, It just need to have the realm_id updated for the new ones in the new Keycloak setup.
+
+
+
 
   
