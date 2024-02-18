@@ -35,6 +35,10 @@ Each register only refers for a upstream folder (or not) and a realm_id.
 
 So the idea here in Groups is the same for Users, It just need to have the realm_id updated for the new ones in the new Keycloak setup.
 
+## Roles migration
+
+Inside the Realm, How a User is associated with a Role?
+
 
 
 
