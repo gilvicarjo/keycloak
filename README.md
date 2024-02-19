@@ -3,7 +3,7 @@
 # Setup Keycloak
 # Setup Database
 # Setup Webserver
-# Migração Database
+# Database Migration
 
 ## Realms migration
 Rule: Create realms from scratch on the new Keycloak instance.
