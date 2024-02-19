@@ -79,7 +79,35 @@ INSERT INTO public.user_role_mapping (role_id,user_id) VALUES
 	 ('role_id1','user_id2'),
 ```
 
-### Default Roles (397 cases)
+### Default Roles
+
+For the default roles, the steps are:
+
+1) Filter in the user_role_mapping (from the old keycloak) by realm_id the ids from the roles (manage-account, offline_access, uma_authorization, view-profile, manage-clients, manage-users).
+
+this 2 queries are a example of that and will help you 
+
+```
+SELECT id, "name"
+FROM public.keycloak_role
+where realm_id = 'viva' or client_realm_constraint = 'viva';
+
+
+SELECT role_id, user_id
+FROM public.user_role_mapping
+where role_id in (
+'b552b24d-130f-42aa-a060-86080b84337c',  (manage-account)
+'a193107e-7815-4c48-8bad-11ad587520a2',  (offline_access)
+'d8bd32ff-a3d4-4bdc-ba2e-500f2b5f3f11',  (uma_authorization)
+'962620cb-f894-4ceb-892a-9d0fc3dbd503',  (view-profile)
+'abde0cbf-0ce4-41d7-b890-930dd9764f42',  (manage-clients)
+'93cbe46f-bb7d-4098-a049-49fdff4410df'   (manage-users)
+)
+```
+
+2) Then, export this result (export data - in Dbeaver) in a SQL format
+3) Now the idea is to replace the role_id of the same roles in the new keycloak.
+4) After that, apply this INSERT in the new keycloak database.
 
 
 
