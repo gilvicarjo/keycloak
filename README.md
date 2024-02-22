@@ -48,7 +48,7 @@ You can now access PostgreSQL using the psql command-line tool or connect to it 
 
 ### postgresql.conf file
 
-In the file /var/lib/pgsql/${postgresql_version}/data/postgresql.conf
+In the file /var/lib/pgsql/15/data/postgresql.conf
 Add the following line:
 ```
 listen_addresses = '*'
@@ -79,7 +79,7 @@ default_text_search_config = 'pg_catalog.english'
 
 ### pg_hba.conf file 
 
-In the file /var/lib/pgsql/${postgresql_version}/data/pg_hba.conf
+In the file /var/lib/pgsql/15/data/pg_hba.conf
 Add the following lines in the end of the file.
 
 For example:
@@ -99,7 +99,7 @@ Make sure, both PRIMARY and STANDBY Servers have the appropriate configs for thi
 In the STANDBY Server remove the data folder content:
 
 ```
-rm -rf /var/lib/pgsql/${postgresql_version}/data/*
+rm -rf /var/lib/pgsql/15/data/*
 ```
 Next, make sure both server have the same permission configs
 ```
