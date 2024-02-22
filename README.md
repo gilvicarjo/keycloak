@@ -31,7 +31,7 @@ sudo systemctl start postgresql-15
 
 Until here, you can do the same steps in the Standby PostgreSQL Server
 
-## Create a user for Replication
+## Create a user for Replication (Now at the PRIMARY Server(
 
 Only at the MASTER/PRIMARY PostgreSQL Server create a user for Replication purposes:
 ```
@@ -94,7 +94,7 @@ host    postgres        postgres        ::/0                    md5
 ```
 Make sure, both PRIMARY and STANDBY Servers have the appropriate configs for this file.
 
-### Configure Replication
+### Configure Replication (NOW in the Standby Server)
 
 In the STANDBY Server remove the data folder content:
 
