@@ -31,7 +31,7 @@ sudo systemctl start postgresql-15
 
 Until here, you can do the same steps in the Standby PostgreSQL Server
 
-## Create a user for Replication (Now at the PRIMARY Server(
+## Create a user for Replication (Now at the PRIMARY Server)
 
 Only at the MASTER/PRIMARY PostgreSQL Server create a user for Replication purposes:
 ```
