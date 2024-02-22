@@ -10,7 +10,6 @@ sudo dnf install java-17-openjdk
 javac -version
 ```
 
-
 ## Configure Initial KEYCLOAK_ADMIN and KEYCLOAK_ADMIN_PASSWORD
 
 Open the file vim /etc/environment and define the Values for the Keys
@@ -31,7 +30,68 @@ admin.qld
 ```
 Make sure, you have the values at the session you will run Keycloak.
 
-sudo dnf install --assumeyes java-17-openjdk-devel.x86_64
+## Installing Keycloak
+
+Create the path and go there to get the Keycloak package:
+```
+mkdir -p /opt/keycloak && cd /opt/keycloak
+wget https://github.com/keycloak/keycloak/releases/download/23.0.6/keycloak-23.0.6.tar.gz
+tar -xvzf keycloak-23.0.6.tar.gz
+mv keycloak-23.0.6 23.0.6
+ln -s /opt/keycloak/23.0.6 /opt/keycloak/current
+groupadd keycloak
+useradd -r -g keycloak -d /opt/keycloak -s /sbin/nologin keycloak
+chown -R keycloak: /opt/keycloak
+chmod o+x /opt/keycloak/23.0.6/bin/
+```
+## Copy Certificates
+
+Attach certificates from the folder /etc/ssl/certs/ from any other keycloak server in the organization.
+```
+tmlmobilidade.pt.crt.pem
+tmlmobilidade.pt.key.pem
+```
+
+## Configure keycloak.conf
+
+For a first build add the following content for the /opt/keycloak/23.0.6/conf/keycloak.conf file
+
+```
+#db=postgres
+#db-username=sa_keycloak_${env}
+#db-password=YOUR_:PASSWORD
+#db-url=jdbc:postgresql://10.129.62.10:5432/db_keycloak_${env}
+#https-certificate-file=/etc/ssl/certs/tmlmobilidade.pt.crt.pem
+#https-certificate-key-file=/etc/ssl/certs/tmlmobilidade.pt.key.pem
+http-relative-path=/auth
+#proxy=reencrypt
+http-enabled=true
+http-port=8180
+hostname-url=http://localhost:8180/auth/
+hostname-admin-url=http://localhost:8180/auth/
+log=console,file
+log-level=TRACE
+log-file=/var/log/keycloak/server.log
+log-console-output=default
+features=admin-fine-grained-authz,scripts,token-exchange
+```
+
+Now go to /opt/keycloak/23.0.6/conf/ and run:
+
+```
+./kc.sh build
+./kc.sh show-config
+./kc.sh start-dev
+
+```
+
+## Configure keycloak.service
+
+
+
+
+
+## Copy 
 
 # Setup Database
 
@@ -116,12 +176,28 @@ Add the following lines in the end of the file.
 
 For example:
 ```
-host    replication     replicator_qld  10.129.42.11/32         md5 **(StandBy PostgresSQL Server)**
+#Replication From Postgres Backup
+host    replication     replicator_qld  10.129.42.11/32         md5
+#Jumpserver
 host    db_keycloak_qld sa_keycloak_qld 10.129.61.11/32         md5
 host    db_keycloak_qld sa_keycloak_qld ::/0                    md5
 host    postgres        sa_keycloak_qld 10.129.61.11/32         md5
 host    postgres        sa_keycloak_qld ::/0                    md5
 host    postgres        postgres        10.129.61.11/32         md5
+host    postgres        postgres        ::/0                    md5
+#KeycloakPrimary
+host    db_keycloak_qld sa_keycloak_qld 10.129.41.10/32         md5
+host    db_keycloak_qld sa_keycloak_qld ::/0                    md5
+host    postgres        sa_keycloak_qld 10.129.41.10/32         md5
+host    postgres        sa_keycloak_qld ::/0                    md5
+host    postgres        postgres        10.129.41.10/32         md5
+host    postgres        postgres        ::/0                    md5
+#KeycloakBackup
+host    db_keycloak_qld sa_keycloak_qld 10.129.41.11/32         md5
+host    db_keycloak_qld sa_keycloak_qld ::/0                    md5
+host    postgres        sa_keycloak_qld 10.129.41.11/32         md5
+host    postgres        sa_keycloak_qld ::/0                    md5
+host    postgres        postgres        10.129.41.11/32         md5
 host    postgres        postgres        ::/0                    md5
 ```
 Make sure, both PRIMARY and STANDBY Servers have the appropriate configs for this file.
