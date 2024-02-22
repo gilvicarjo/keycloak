@@ -67,6 +67,10 @@ If you have customized any of the styles and are extending the Keycloak themes y
 
 If you have customized messages you might need to change the key or value or to add additional messages.
 
+## Copy Themes Directory
+
+Copy all files from 
+
 ## Configure keycloak.conf
 
 For a first build add the following content for the /opt/keycloak/23.0.6/conf/keycloak.conf file
