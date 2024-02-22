@@ -57,12 +57,12 @@ tmlmobilidade.pt.key.pem
 For a first build add the following content for the /opt/keycloak/23.0.6/conf/keycloak.conf file
 
 ```
-#db=postgres
-#db-username=sa_keycloak_${env}
-#db-password=YOUR_:PASSWORD
-#db-url=jdbc:postgresql://10.129.62.10:5432/db_keycloak_${env}
-#https-certificate-file=/etc/ssl/certs/tmlmobilidade.pt.crt.pem
-#https-certificate-key-file=/etc/ssl/certs/tmlmobilidade.pt.key.pem
+db=postgres
+db-username=sa_keycloak_${env}
+db-password=YOUR_:PASSWORD
+db-url=jdbc:postgresql://10.129.42.10:5432/db_keycloak_${env}
+https-certificate-file=/etc/ssl/certs/tmlmobilidade.pt.crt.pem
+https-certificate-key-file=/etc/ssl/certs/tmlmobilidade.pt.key.pem
 http-relative-path=/auth
 #proxy=reencrypt
 http-enabled=true
@@ -82,8 +82,8 @@ Now go to /opt/keycloak/23.0.6/conf/ and run:
 ./kc.sh build
 ./kc.sh show-config
 ./kc.sh start-dev
-
 ```
+Make sure you tested all the connections maily with Postgre before move forward with the next steps.
 
 ## Configure keycloak.service
 
