@@ -85,6 +85,14 @@ Now go to /opt/keycloak/23.0.6/conf/ and run:
 ```
 Make sure you tested all the connections maily with Postgre before move forward with the next steps.
 
+After that you can procced with:
+
+```
+./kc.sh build
+./kc.sh start
+```
+And after validate a reasonable production setup, you can setup the service in the next section
+
 ## Configure keycloak.service
 
 
