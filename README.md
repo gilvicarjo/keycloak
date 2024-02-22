@@ -105,7 +105,6 @@ Next, make sure both server have the same permission configs
 ```
 sudo chown -R postgres:postgres /var/lib/pgsql/15/data
 sudo chmod -R 700 /var/lib/pgsql
-
 ```
 Then, Copy files from the master using pg_basebackup.
 
