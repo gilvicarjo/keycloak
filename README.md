@@ -52,6 +52,21 @@ tmlmobilidade.pt.crt.pem
 tmlmobilidade.pt.key.pem
 ```
 
+## Copy Themes Directory
+Ref: https://www.keycloak.org/docs/latest/upgrading/index.html
+
+If you have created any custom themes they must be migrated to the new server. Any changes to the built-in themes might need to be reflected in your custom themes, depending on which aspects you have customized.
+
+You must copy your custom themes from the old server themes directory to the new server themes directory. After that you need to review the changes below and consider if the changes need to be applied to your custom theme.
+
+In summary:
+
+If you have customized any of the changed templates listed below you need to compare the template from the base theme to see if there are changes you need to apply.
+
+If you have customized any of the styles and are extending the Keycloak themes you need to review the changes to the styles. If you are extending the base theme you can skip this step.
+
+If you have customized messages you might need to change the key or value or to add additional messages.
+
 ## Configure keycloak.conf
 
 For a first build add the following content for the /opt/keycloak/23.0.6/conf/keycloak.conf file
