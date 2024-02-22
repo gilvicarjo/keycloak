@@ -80,7 +80,7 @@ default_text_search_config = 'pg_catalog.english'
 ### pg_hba.conf file 
 
 In the file /var/lib/pgsql/${postgresql_version}/data/pg_hba.conf
-Add the following lines in the end of the file:
+Add the following lines in the end of the file.
 
 For example:
 ```
