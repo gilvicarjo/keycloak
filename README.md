@@ -4,7 +4,7 @@
 # Setup Database
 
 ## Install PostgreSQL 15
-
+Ref: https://medium.com/@umairhassan27/setting-up-postgresql-replication-on-slave-server-a-step-by-step-guide-1ff36bb9a47f
 ```
 vim /etc/yum.repos.d/pgdg-oraclelinux.repo
 ```
