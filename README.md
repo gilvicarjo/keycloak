@@ -20,6 +20,8 @@ And then, validate the values:
 $ echo $KEYCLOAK_ADMIN
 admin.qld
 ```
+Make sure, you have the values at the session you will run Keycloak.
+
 
 # Setup Database
 
