@@ -2,6 +2,15 @@
 
 # Setup Keycloak
 
+## Installing JDK 17
+
+```
+sudo dnf install --assumeyes java-17-openjdk-devel.x86_64
+sudo dnf install java-17-openjdk
+javac -version
+```
+
+
 ## Configure Initial KEYCLOAK_ADMIN and KEYCLOAK_ADMIN_PASSWORD
 
 Open the file vim /etc/environment and define the Values for the Keys
@@ -22,6 +31,7 @@ admin.qld
 ```
 Make sure, you have the values at the session you will run Keycloak.
 
+sudo dnf install --assumeyes java-17-openjdk-devel.x86_64
 
 # Setup Database
 
