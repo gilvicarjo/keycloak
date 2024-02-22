@@ -84,7 +84,7 @@ Add the following lines in the end of the file.
 
 For example:
 ```
-host    replication     replicator      10.129.42.11/32         md5 **(StandBy PostgresSQL Server)**
+host    replication     replicator_qld  10.129.42.11/32         md5 **(StandBy PostgresSQL Server)**
 host    db_keycloak_qld sa_keycloak_qld 10.129.61.11/32         md5
 host    db_keycloak_qld sa_keycloak_qld ::/0                    md5
 host    postgres        sa_keycloak_qld 10.129.61.11/32         md5
