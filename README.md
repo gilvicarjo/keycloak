@@ -1,6 +1,26 @@
 # keycloak
 
 # Setup Keycloak
+
+## Configure Initial KEYCLOAK_ADMIN and KEYCLOAK_ADMIN_PASSWORD
+
+Open the file vim /etc/environment and define the Values for the Keys
+
+```
+KEYCLOAK_ADMIN=admin.${env}
+KEYCLOAK_ADMIN_PASSWORD=VjA5bUNSUVN5blRqZ0E9PQo=YOUR_PASSWORD
+```
+After that:
+```
+source /etc/environment
+```
+And then, validate the values:
+
+```
+$ echo $KEYCLOAK_ADMIN
+admin.qld
+```
+
 # Setup Database
 
 ## Install PostgreSQL 15
