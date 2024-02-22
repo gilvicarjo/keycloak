@@ -92,12 +92,40 @@ host    postgres        sa_keycloak_qld ::/0                    md5
 host    postgres        postgres        10.129.61.11/32         md5
 host    postgres        postgres        ::/0                    md5
 ```
+Make sure, both PRIMARY and STANDBY Servers have the appropriate configs for this file.
+
+### Configure Replication
+
+In the STANDBY Server remove the data folder content:
+
+```
+rm -rf /var/lib/pgsql/${postgresql_version}/data/*
+```
+Next, make sure both server have the same permission configs
+```
+sudo chown -R postgres:postgres /var/lib/pgsql/15/data
+sudo chmod -R 700 /var/lib/pgsql
+
+```
+Then, Copy files from the master using pg_basebackup.
+
+For example:
+```
+pg_basebackup -h 10.129.42.10 -D /var/lib/pgsql/15/data -U replicator_qld -P -v -R -X stream
+```
 After that, restart the service:
 ```
 sudo systemctl restart postgresql-15
 ```
+To validate, create a database.
 
-You must do the same steps until here 
+For example:
+```
+CREATE DATABASE test_replication;
+```
+
+And check in the both sides.
+
 
 ## Configure Keycloak Database
 
