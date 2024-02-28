@@ -287,6 +287,14 @@ Password: YOUR_PASSWORD
 ```
 
 # Setup Webserver
+
+## Install HAProxy
+
+```
+sudo dnf update -y
+sudo dnf install haproxy -y
+```
+
 # Database Migration
 
 ## Realms migration
