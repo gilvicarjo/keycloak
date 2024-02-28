@@ -52,7 +52,7 @@ tmlmobilidade.pt.crt.pem
 tmlmobilidade.pt.key.pem
 ```
 
-## Copy Themes Directory
+## Copy Themes Directory (after migrate Database)
 Ref: https://www.keycloak.org/docs/latest/upgrading/index.html
 
 If you have created any custom themes they must be migrated to the new server. Any changes to the built-in themes might need to be reflected in your custom themes, depending on which aspects you have customized.
