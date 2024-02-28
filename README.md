@@ -288,13 +288,72 @@ Password: YOUR_PASSWORD
 
 # Setup Webserver
 
+## Configure Certificates
+
+In the path /etc/ssl/certs/
+```
+openssl genrsa -out tmlmobilidade.key 2048
+openssl req -new -key tmlmobilidade.key -out tmlmobilidade.csr
+openssl x509 -req -days 365 -in tmlmobilidade.csr -signkey tmlmobilidade.key -out tmlmobilidade.crt
+cat tmlmobilidade.crt tmlmobilidade.key > tmlmobilidade.pem
+```
+
 ## Install HAProxy
 
 ```
 sudo dnf update -y
 sudo dnf install haproxy -y
+mkdir /var/log/haproxy
+touch /var/log/haproxy/haproxy.log
+chown -R haproxy:haproxy /var/log/haproxy/
+vim /etc/haproxy/haproxy.cfg
+
+```
+The haproxy.cfg, should look like this:
+```
+global
+    log         /var/log/haproxy/haproxy.log        local0
+    log         /var/log/haproxy/haproxy.log        local1  notice
+    chroot      /var/lib/haproxy
+    stats       socket          /run/haproxy/admin.sock         mode    660     level   admin
+    stats       timeout         30s
+    user        haproxy
+    group       haproxy
+    daemon
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+frontend keycloak_http
+    bind *:8179
+    redirect scheme https if !{ ssl_fc }
+frontend keycloak_https
+    bind *:9444 ssl crt /etc/ssl/certs/tmlmobilidade.pem
+    mode http
+    default_backend keycloak_nodes
+
+backend keycloak_nodes
+    mode http
+    balance roundrobin
+    server node1 10.129.41.10:8180 check
+    server node2 10.129.41.11:8180 check
+```
+After configure haproxy.cfg, it'a time to validate the config
+```
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+Configuration file is valid
+sudo systemctl restart haproxy
 ```
 
+## Configure HTTPD
+
+```
+sudo dnf install httpd mod_ssl
+```
 # Database Migration
 
 ## Realms migration
