@@ -464,7 +464,7 @@ where role_id in (
 
 For **DEV Environment**, the dashboard created: http://monitorizacao.tmlmobilidade.pt/zabbix/zabbix.php?action=dashboard.view&dashboardid=298
 
-For **QLD Environment**, the dashboard created: 
+For **QLD Environment**, the dashboard created: http://monitorizacao.tmlmobilidade.pt/zabbix/zabbix.php?action=dashboard.view&dashboardid=299
 
 For **PRD Environment**, the dashboard created: 
 
